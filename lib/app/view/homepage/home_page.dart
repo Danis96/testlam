@@ -48,14 +48,12 @@ class _HomepageState extends State<Homepage> {
 
   Widget _headlineText(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 7),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text('$home_pozdrav_part1${context.watch<AccountProvider>().userMainInfo.firstName}$home_pozdrav_part2',
-              style: Theme.of(context).textTheme.headline4!.copyWith(
-                    fontSize: 16,
-                  )),
+              style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16, color: ColorHelper.lampGray.color)),
           GestureDetector(
             onTap: () => Navigator.of(context).pushNamed(notifications, arguments: context.read<AccountProvider>()),
             child: Stack(
@@ -108,6 +106,7 @@ class _HomepageState extends State<Homepage> {
   Widget _buildCarousel(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
+          height: MediaQuery.of(context).size.height * 0.225,
           autoPlay: false,
           enableInfiniteScroll: false,
           viewportFraction: 1,
@@ -188,20 +187,27 @@ class _HomepageState extends State<Homepage> {
     return Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06),
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.1)),
+        border: Border.all(color: const Color.fromRGBO(0, 0, 0, 0.1)),
         borderRadius: BorderRadius.circular(32),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.17),
+            blurRadius: 4,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
       ),
       child: SizedBox(
-        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 1.2 : MediaQuery.of(context).size.height / 1.4,
+        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 1.57 : MediaQuery.of(context).size.height / 1.4,
         child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.08),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06),
                 child: Text(
                   context.watch<AccountProvider>().userMainInfo.fullName,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w700, fontStyle: FontStyle.italic),
                 )),
-            const SizedBox(height: 15),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -210,7 +216,6 @@ class _HomepageState extends State<Homepage> {
                 _statePointsWidget(context, home_stanje_km, context.read<AccountProvider>().userMainInfo.totalMoneyAmount.toInt()),
               ],
             ),
-            const SizedBox(height: 1),
             _buildButtonList(context),
           ],
         ),
@@ -233,12 +238,16 @@ class _HomepageState extends State<Homepage> {
               color: ColorHelper.lampGreen.color,
               borderRadius: const BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
             ),
-            child: Center(child: Text(title, style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w500, fontSize: 16))),
+            child: Center(
+                child: Text(title,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w500, fontSize: 16, color: ColorHelper.lampGray.color))),
           ),
           const SizedBox(height: 5),
           isPoints
-              ? Text(formatter.format(value).replaceAll(',', ' '), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700))
-              : Text(value.toString(), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700)),
+              ? Text(formatter.format(value).replaceAll(',', ' '),
+                  style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color))
+              : Text(value.toString(),
+                  style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color)),
         ],
       ),
     );
@@ -252,14 +261,27 @@ class _HomepageState extends State<Homepage> {
         physics: const NeverScrollableScrollPhysics(),
         children: _btnHomeList
             .map((e) => Container(
-                margin: const EdgeInsets.only(top: 5),
-                child: Lamp_Button(
-                    onPressed: () => e.logout
-                        ? logoutDialog(context)
-                        : Navigator.of(context).pushNamed(e.route).then((value) {
-                            _getInitialData();
-                          }),
-                    buttonTitle: e.title)))
+                margin: const EdgeInsets.only(top: 12),
+                child: Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.25),
+                        blurRadius: 4,
+                        blurStyle: BlurStyle.outer,
+                      ),
+                    ],
+                  ),
+                  child: Lamp_Button(
+                      onPressed: () => e.logout
+                          ? logoutDialog(context)
+                          : Navigator.of(context).pushNamed(e.route).then((value) {
+                              _getInitialData();
+                            }),
+                      buttonTitle: e.title),
+                )))
             .toList(),
       ),
     );

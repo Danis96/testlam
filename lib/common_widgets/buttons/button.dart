@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lamp/theme/color_helper.dart';
 
 class Lamp_Button extends StatelessWidget {
-  const Lamp_Button({Key? key, this.buttonTitle = '', this.disabled = false, @required this.onPressed, this.style, this.btnTitleStyle})
-      : super(key: key);
+  const Lamp_Button({Key? key, this.buttonTitle = '', this.disabled = false, @required this.onPressed, this.style, this.btnTitleStyle}) : super(key: key);
 
   final String buttonTitle;
   final bool disabled;
@@ -28,12 +28,13 @@ class Lamp_Button extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: btnTitleStyle ?? const TextStyle(
-                color: Color.fromRGBO(63, 71, 67, 1),
-                fontSize: 20.0,
-                fontFamily: 'Ubuntu',
-                fontWeight: FontWeight.w500,
-              ))),
+              style: btnTitleStyle ??
+                  TextStyle(
+                    color: ColorHelper.lampGray.color,
+                    fontSize: 20.0,
+                    fontFamily: 'Ubuntu',
+                    fontWeight: FontWeight.w500,
+                  ))),
     );
   }
 }

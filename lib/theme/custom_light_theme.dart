@@ -72,7 +72,7 @@ class CustomTheme {
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           textStyle: MaterialStateProperty.resolveWith<TextStyle>(
             (Set<MaterialState> states) {
-              return TextStyle(
+              return const TextStyle(
                 color: Color.fromRGBO(63, 71, 67, 1),
                 fontSize: 20.0,
                 fontFamily: 'Ubuntu',
@@ -95,16 +95,13 @@ class CustomTheme {
           filled: true,
           focusColor: ColorHelper.lampLightGray.color,
           // fillColor: ColorHelper.lampLightGray.color,
-          focusedBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0))),
           isDense: true,
           // contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 21),
-          enabledBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0))),
           focusedErrorBorder:
               const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0))),
-          errorBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0)))),
+          errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent), borderRadius: BorderRadius.all(Radius.circular(15.0)))),
     );
   }
 }
