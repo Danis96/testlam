@@ -307,8 +307,14 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
         Expanded(
           child: Lamp_Button(
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(ColorHelper.lampGray.color),
-                foregroundColor: MaterialStateProperty.all<Color>(ColorHelper.white.color)),
+              backgroundColor: MaterialStateProperty.all<Color>(ColorHelper.lampGray.color),
+            ),
+            btnTitleStyle: TextStyle(
+              color: ColorHelper.white.color,
+              fontSize: 20.0,
+              fontFamily: 'Ubuntu',
+              fontWeight: FontWeight.w500,
+            ),
             onPressed: () => nazad(),
             buttonTitle: prodajna_mjesta_btn_nazad,
           ),
@@ -356,6 +362,7 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
                         provider.showCityWidget(false);
                         _pagingController.refresh();
                         Navigator.of(ctx).pop();
+                        Navigator.of(ctx).pop();
                       }, () {
                         Navigator.of(ctx).pop();
                       }),
@@ -395,6 +402,7 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
                         await provider.getMerchants(pKey.toString(), '10');
                         provider.showCategoryWidget(false);
                         _pagingController.refresh();
+                        Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       }, () {
                         Navigator.of(ctx).pop();

@@ -61,7 +61,7 @@ const String prodajna_mjesta_adresa = 'Adresa';
 const String prodajna_mjesta_mjesto = 'Mjesto';
 
 // POMOZI BA
-const String pomozi_app_bar = 'Doniraj Bodove';
+const String pomozi_app_bar = 'Doniraj bodove';
 const String pomozi_point_number_field = 'Unesi broj bodova';
 const String pomozi_pokloni_bodove_btn = 'Potvrdi';
 const String pomozi_pokloni_headline = 'Budimo humani, jer imamo samo ono što damo.';
