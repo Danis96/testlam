@@ -84,13 +84,12 @@ class CustomTheme {
       ),
       dividerTheme: DividerThemeData(thickness: 1, color: ColorHelper.white.color),
       cardTheme: CardTheme(
-        elevation: 2,
+        elevation: 1.5,
         color: ColorHelper.white.color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         shadowColor: ColorHelper.lampLightGray.color,
       ),
       inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: ColorHelper.lampGray.color, fontSize: 28.0, height: 1.7, fontWeight: FontWeight.w500),
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           // alignLabelWithHint: true,
           filled: true,

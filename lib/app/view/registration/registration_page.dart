@@ -9,6 +9,7 @@ import 'package:lamp/common_widgets/loader/lamp_loader.dart';
 import 'package:lamp/common_widgets/tappable_text/tappable_text.dart';
 import 'package:lamp/common_widgets/text_field/TextFieldType.dart';
 import 'package:lamp/routing/routes.dart';
+import 'package:lamp/theme/color_helper.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/string_texts.dart';
@@ -35,7 +36,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     textAlign: TextAlign.center,
     style: new TextStyle(fontWeight: FontWeight.w400, color: Colors.white, fontSize: 16),
     decoration: InputDecoration(
-      hintText: 'Email',
       fillColor: Colors.amber,
       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10.0),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
@@ -49,27 +49,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       children: <Widget>[
         const SizedBox(height: 50),
         _buildImg(context),
-        Container(
-          height: 45,
-          color: Colors.amber,
-        ),
-        SizedBox(
-            // height: 45,
-            child: TextFormField(
-              // maxLines: null,
-
-
-            )),
-        ElevatedButton(onPressed: () {}, child: Text('Prijava',)),
-        const SizedBox(height: 50),
-        Row(
-          children: [
-            Expanded(child: Container(
-                // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-                child: email)),
-          ],
-        ),
-
         const SizedBox(height: 50),
         _buildForm(context),
       ],
@@ -115,7 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           obscureText: !showPass,
         ),
         Positioned(
-            bottom: 40,
+            bottom: 36,
             right: 15,
             child: GestureDetector(
                 onTap: () {
@@ -123,7 +102,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     showPass = !showPass;
                   });
                 },
-                child: Icon(showPass ? Icons.visibility_off : Icons.visibility))),
+                child: Icon(showPass ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: ColorHelper.lampGray.color))),
       ],
     );
   }

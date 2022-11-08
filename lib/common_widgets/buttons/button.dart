@@ -24,12 +24,16 @@ class Lamp_Button extends StatelessWidget {
       style: style,
       child: Padding(
           padding: const EdgeInsets.all(5),
-          child: Text(buttonTitle, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center, style: TextStyle(
-            color: Color.fromRGBO(63, 71, 67, 1),
-            fontSize: 20.0,
-            fontFamily: 'Ubuntu',
-            fontWeight: FontWeight.w500,
-          ))),
+          child: Text(buttonTitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: btnTitleStyle ?? const TextStyle(
+                color: Color.fromRGBO(63, 71, 67, 1),
+                fontSize: 20.0,
+                fontFamily: 'Ubuntu',
+                fontWeight: FontWeight.w500,
+              ))),
     );
   }
 }
