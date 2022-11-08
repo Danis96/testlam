@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lamp/app/models/articles_model.dart';
@@ -22,7 +24,6 @@ class _ArticlesPageState extends State<ArticlesPage> {
   int pKey = 1;
   final PagingController<int, ArticlesModel> _pagingController = PagingController<int, ArticlesModel>(firstPageKey: 0);
   List<ArticlesModel> articles = <ArticlesModel>[];
-
 
   @override
   void initState() {
@@ -116,71 +117,103 @@ Widget _buildSearchWidget(BuildContext context) {
 }
 
 Widget _buildArticlesGridList(BuildContext context) {
-  return context.watch<ArticlesProvider>().showEmpty ? const SizedBox() : GridView.count(
-    primary: false,
-    shrinkWrap: true,
-    crossAxisSpacing: 10,
-    mainAxisSpacing: 70,
-    crossAxisCount: 2,
-    padding: const EdgeInsets.symmetric(horizontal: 24),
-    children: (context.watch<ArticlesProvider>().searchList.isNotEmpty
-            ? context.watch<ArticlesProvider>().searchList
-            : context.watch<ArticlesProvider>().articles)
-        .map((e) => GestureDetector(
-            onTap: () {
-              context.read<ArticlesProvider>().setArticleID(e.id);
-              Navigator.of(context).pushNamed(articleDetails, arguments: context.read<ArticlesProvider>());
-            },
-            child: _buildArticlesItem(context, name: e.name, bodovi: e.creditAmount.toString(), img: e.image, km: e.priceAmount.toString())))
-        .toList(),
-  );
+  return context.watch<ArticlesProvider>().showEmpty
+      ? const SizedBox()
+      : GridView.count(
+          primary: false,
+          shrinkWrap: true,
+          crossAxisSpacing: 33,
+          mainAxisSpacing: 33,
+          crossAxisCount: 2,
+          childAspectRatio: Platform.isIOS ? 0.74 : 0.65,
+          padding: const EdgeInsets.symmetric(horizontal: 38),
+          children: (context.watch<ArticlesProvider>().searchList.isNotEmpty
+                  ? context.watch<ArticlesProvider>().searchList
+                  : context.watch<ArticlesProvider>().articles)
+              .map((e) => GestureDetector(
+                  onTap: () {
+                    context.read<ArticlesProvider>().setArticleID(e.id);
+                    Navigator.of(context).pushNamed(articleDetails, arguments: context.read<ArticlesProvider>());
+                  },
+                  child: _buildArticlesItem(context, name: e.name, bodovi: e.creditAmount.toString(), img: e.image, km: e.priceAmount.toString())))
+              .toList(),
+        );
 }
 
 Widget _buildArticlesItem(BuildContext context, {String img = '', String name = '', String bodovi = '', String km = ''}) {
   return Container(
-    height: 230,
     decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(11)),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        SizedBox(
-          height: 159,
-          child: Image.network(
-            img,
-            fit: BoxFit.cover,
-            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-              return Container(
-                width: 400,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.transparent),
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(11),
-                    topLeft: Radius.circular(11),
-                  ),
-                ),
-                child: Image.asset('assets/lampica_logo.png', fit: BoxFit.contain,),
-              );
-            },
-          ),
+    child: Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+              child: Image.network(
+                img,
+                height: 120,
+                width: MediaQuery.of(context).size.width / 2,
+                fit: BoxFit.fill,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent),
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(11),
+                        topLeft: Radius.circular(11),
+                      ),
+                    ),
+                    child: Image.asset(
+                      'assets/lampica_logo.png',
+                      fit: BoxFit.contain,
+                      height: 120,
+                      width: MediaQuery.of(context).size.width / 2,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Text(name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, color: ColorHelper.lampGray.color, fontSize: 16)),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  color: ColorHelper.lampGreen.color,
+                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
+              child: Column(
+                children: <Widget>[
+                  Text('$bodovi b',
+                      style:
+                          Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
+                  Text('$km KM',
+                      style:
+                          Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
+                ],
+              ),
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Text(name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 13)),
-        ),
-        const SizedBox(height: 2),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: ColorHelper.lampGreen.color,
-              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
-          child: Column(
-            children: <Widget>[
-              Text('$bodovi b', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontSize: 19)),
-              Text('$km KM', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontSize: 19)),
-            ],
+        Positioned(
+          bottom: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.085 : MediaQuery.of(context).size.height * 0.065,
+          right: Platform.isAndroid ? MediaQuery.of(context).size.width * 0.02 : MediaQuery.of(context).size.width * 0.01,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: ColorHelper.white.color,
+              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0, blurRadius: 10)],
+            ),
+            height: 27,
+            width: 27,
+            padding: const EdgeInsets.all(9),
+            child: Image.asset('assets/arrow_right.png'),
           ),
         ),
       ],

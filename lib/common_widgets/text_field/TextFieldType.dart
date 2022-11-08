@@ -144,12 +144,10 @@ Widget _buildTextFormField({
   bool isPasswordType() => type == TextFieldType.passwordType;
   bool isDropDownType() => type == TextFieldType.dropdownFieldType;
   return SizedBox(
-    // height: 45,
-    // width: 400,
     child: TextFormField(
       key: key,
-      style: TextStyle(color: inputColor),
-      // maxLines: type == TextFieldType.textAreaType ? 10 : 1,
+      style: TextStyle(color: ColorHelper.lampGray.color, fontSize: 16.0, fontWeight: FontWeight.w400),
+      maxLines: type == TextFieldType.textAreaType ? 10 : 1,
       textCapitalization: textCapitalization!,
       textAlign: textAlign,
       inputFormatters: inputFormatters,
@@ -158,39 +156,15 @@ Widget _buildTextFormField({
       onTap: () => onTap != null ? onTap() : print(''),
       onChanged: (String input) => onChanged!(),
       readOnly: readOnly,
-      validator: validation ??
-          (String? value) {
-            if (value!.isEmpty) {
-              return errorTextEmpty;
-            } else {
-              return null;
-            }
-          },
       obscuringCharacter: '*',
       obscureText: isPasswordType() ? obscure : obscureRegular,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        prefixIconColor: ColorHelper.lampGray.color,
         helperText: '',
-        suffixIcon: icon ?? const SizedBox(),
-        // suffixIcon: isDropDownType()
-        //     ? IconButton(
-        //         icon: const Icon(Icons.arrow_drop_down),
-        //         color: const Color.fromRGBO(189, 195, 199, 1),
-        //         onPressed: () => dropdownPressFunction!(),
-        //       )
-        //     : isPasswordType()
-        //         ? IconButton(
-        //             icon: Icon(obscure ? Icons.visibility : Icons.visibility_off),
-        //             color: ColorHelper.lampGray.color,
-        //             onPressed: () => visibilityFunction!(),
-        //           )
-        //         : icon,
+        suffixIcon: icon,
         hintText: hintText,
         focusColor: ColorHelper.lampLightGray.color,
-        errorStyle: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300),
-        errorText: errorMessage,
-        errorMaxLines: 2,
-        errorBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
       ),
     ),
   );
