@@ -36,7 +36,7 @@ class _KarticaPageState extends State<KarticaPage> with WidgetsBindingObserver {
   }
 
   Future<void> _getInitialData() async {
-    await _getBrightness();
+    _getBrightness();
     await context.read<AccountProvider>().setBarcodeSvg();
   }
 
@@ -95,7 +95,7 @@ class _KarticaPageState extends State<KarticaPage> with WidgetsBindingObserver {
             child: Container(
               height: 174,
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: context.watch<AccountProvider>().barcodeSVGPath != null
+              child: context.watch<AccountProvider>().barcodeSVGPath != null || context.watch<AccountProvider>().barcodeSVGPath!.isNotEmpty
                   ? SvgPicture.file(File(context.watch<AccountProvider>().barcodeSVGPath!))
                   : const SizedBox(),
             ),

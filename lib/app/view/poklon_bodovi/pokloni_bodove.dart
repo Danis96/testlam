@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:lamp/app/providers/send_points_provider/send_points_provider.dart';
 import 'package:lamp/app/utils/string_texts.dart';
 import 'package:lamp/common_widgets/buttons/button.dart';
@@ -57,6 +58,7 @@ class PokloniBodove extends StatelessWidget {
 
   Widget cardNumberField(BuildContext context) {
     return Lamp_TextFormField(
+      inputFormatters: [MaskedInputFormatter('### ### ###')],
       hintText: pokloni_card_number_field,
       keyboardType: TextInputType.number,
       controller: context.read<SendPointsProvider>().cardNoController,
