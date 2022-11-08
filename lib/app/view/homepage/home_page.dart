@@ -42,9 +42,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WillPopScope(
-          onWillPop: () async => false,
-          child: SafeArea(child: _buildBody(context))),
+      body: WillPopScope(onWillPop: () async => false, child: SafeArea(child: _buildBody(context))),
     );
   }
 
@@ -55,7 +53,9 @@ class _HomepageState extends State<Homepage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text('$home_pozdrav_part1${context.watch<AccountProvider>().userMainInfo.firstName}$home_pozdrav_part2',
-              style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16)),
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                    fontSize: 16,
+                  )),
           GestureDetector(
             onTap: () => Navigator.of(context).pushNamed(notifications, arguments: context.read<AccountProvider>()),
             child: Stack(
@@ -188,7 +188,7 @@ class _HomepageState extends State<Homepage> {
     return Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06),
       decoration: BoxDecoration(
-         border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.1)),
+        border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.1)),
         borderRadius: BorderRadius.circular(32),
       ),
       child: SizedBox(
@@ -210,7 +210,7 @@ class _HomepageState extends State<Homepage> {
                 _statePointsWidget(context, home_stanje_km, context.read<AccountProvider>().userMainInfo.totalMoneyAmount.toInt()),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 1),
             _buildButtonList(context),
           ],
         ),
@@ -236,9 +236,9 @@ class _HomepageState extends State<Homepage> {
             child: Center(child: Text(title, style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w500, fontSize: 16))),
           ),
           const SizedBox(height: 5),
-          isPoints ?
-          Text(formatter.format(value).replaceAll(',', ' '), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700)) :
-          Text(value.toString(), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700)),
+          isPoints
+              ? Text(formatter.format(value).replaceAll(',', ' '), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700))
+              : Text(value.toString(), style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -252,7 +252,7 @@ class _HomepageState extends State<Homepage> {
         physics: const NeverScrollableScrollPhysics(),
         children: _btnHomeList
             .map((e) => Container(
-                margin: const EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 5),
                 child: Lamp_Button(
                     onPressed: () => e.logout
                         ? logoutDialog(context)
