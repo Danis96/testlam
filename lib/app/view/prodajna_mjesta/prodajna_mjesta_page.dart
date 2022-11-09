@@ -28,7 +28,10 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
   @override
   void initState() {
     super.initState();
-    _getCitiesAndCategories();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Lamp_LoaderCircleWhite(context: context);
+      _getCitiesAndCategories().then((value) => Navigator.of(context).pop());
+    });
     _fetchPage();
   }
 
@@ -73,7 +76,7 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
       onActionPressed: null,
       implyAction: false,
       implyLeading: false,
-      titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 1.6, child: Image.asset('assets/lamp_prodajna_mjesta.png')),
+      titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 1.5, child: Image.asset('assets/lamp_prodajna_mjesta.png')),
       centerTitle: false,
       onLeadingPressed: null,
       bottomWidget: _buildSearch(context),

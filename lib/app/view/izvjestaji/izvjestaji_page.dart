@@ -51,7 +51,7 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
       onActionPressed: null,
       implyAction: false,
       implyLeading: false,
-      titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.1, child: Image.asset('assets/lamp_izvjestaji.png')),
+      titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 1.7, child: Image.asset('assets/lamp_izvjestaji.png')),
       centerTitle: true,
       onLeadingPressed: null,
     );
@@ -108,7 +108,7 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
         hintText: 'Pretraži',
         icon: GestureDetector(
             onTap: () => context.read<ReportProvider>().setShowFilter(!context.read<ReportProvider>().showFilter),
-            child: Icon(Icons.tune, size: 28, color: ColorHelper.lampGray.color)),
+            child: const Icon(Icons.tune, size: 28, color: Color.fromRGBO(63, 71, 67, 1))),
         textAlign: TextAlign.start,
         prefixIcon: Icon(Icons.search, size: 28, color: ColorHelper.lampGray.color),
       ),
@@ -201,11 +201,13 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
       margin: const EdgeInsets.only(top: 20),
       child: Card(
         child: Container(
+          height: 75,
           decoration:
               BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color.withOpacity(0.5)), borderRadius: BorderRadius.circular(10)),
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,14 +217,23 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
                       child: Text(merchantName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontSize: 17))),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w400))),
                   Expanded(
                     child: Container(
                       width: 100,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
-                        child: Text(transactionPoint.contains('-') ? '$transactionPoint b' : '+$transactionPoint b',
-                            style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 22)),
+                        child: Text(
+                          transactionPoint.contains('-') ? '$transactionPoint b' : '${transactionPoint.replaceAll('-', '+')} b',
+                          style: Theme.of(context).textTheme.headline2!.copyWith(
+                                color: transactionPoint.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w400,
+                              ),
+                        ),
                       ),
                     ),
                   ),
@@ -234,12 +245,12 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
                       style: Theme.of(context)
                           .textTheme
                           .headline2!
-                          .copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
+                          .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w400)),
                   Text('u iznosu od $desc KM',
                       style: Theme.of(context)
                           .textTheme
                           .headline2!
-                          .copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
+                          .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w400)),
                 ],
               ),
             ],

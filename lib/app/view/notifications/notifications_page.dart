@@ -46,7 +46,7 @@ PreferredSizeWidget _appBar(BuildContext context) {
     context,
     onActionPressed: null,
     implyAction: false,
-    titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 2, child: Image.asset('assets/lamp_notification.png')),
+    titleWidget: SizedBox(width: MediaQuery.of(context).size.width / 1.6, child: Image.asset('assets/lamp_notification.png')),
     centerTitle: true,
     onLeadingPressed: () => Navigator.of(context).pop(),
     leadingIcon: Icons.arrow_back_ios,

@@ -33,7 +33,7 @@ class ProviderHelper {
     int code = int.parse(errorCode);
     switch (code) {
       case -1:
-        return 'Neuspješno slanje bodova. Neispravni ulazni podaci.';
+        return 'Neuspješno slanje bodova. Pogrešan broj telefona.';
       case -2:
         return 'Neuspješno slanje bodova. Korisnički podaci nisu popunjeni.';
       case -3:

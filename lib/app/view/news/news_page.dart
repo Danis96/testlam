@@ -107,62 +107,62 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   Widget _newsWidget(BuildContext context, String image, String title, String date, int id) {
-    return Stack(
-      alignment: Alignment.center,
-      fit: StackFit.loose,
-      children: <Widget>[
-        Card(
-          elevation: 1,
-          child: Container(
-            decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(11)),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 300,
-                  width: 300,
-                  child: image != ''
-                      ? ClipRRect(
-                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.fill,
-                      ))
-                      : const SizedBox(),
-                ),
-                SizedBox(
-                  height: 55,
-                  child: Column(
-                    children: <Widget>[
-                      const SizedBox(height: 2),
-                      Container(
-                        width: 300,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontSize: 18)),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        width: 300,
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(date, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 13)),
-                      ),
-                    ],
+    return GestureDetector(
+      onTap: () {
+        context.read<NewsProvider>().setNewsId(id);
+        Navigator.of(context).pushNamed(newsDetails, arguments: context.read<NewsProvider>());
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        fit: StackFit.loose,
+        children: <Widget>[
+          Card(
+            elevation: 1,
+            child: Container(
+              decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(11)),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: image != ''
+                        ? ClipRRect(
+                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+                        child: Image.network(
+                          image,
+                          fit: BoxFit.fill,
+                        ))
+                        : const SizedBox(),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 55,
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(height: 2),
+                        Container(
+                          width: 300,
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontSize: 18)),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          width: 300,
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(date, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 13)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Positioned(
-          bottom: Platform.isAndroid ? MediaQuery.of(context).size.height / 17 : MediaQuery.of(context).size.height / 20,
-          right: Platform.isAndroid ? MediaQuery.of(context).size.width / 10 : MediaQuery.of(context).size.width / 14,
-          child: GestureDetector(
-            onTap: () {
-              context.read<NewsProvider>().setNewsId(id);
-              Navigator.of(context).pushNamed(newsDetails, arguments: context.read<NewsProvider>());
-            },
+          Positioned(
+            bottom: Platform.isAndroid ? MediaQuery.of(context).size.height / 17 : MediaQuery.of(context).size.height / 20,
+            right: Platform.isAndroid ? MediaQuery.of(context).size.width / 10 : 9,
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -175,8 +175,8 @@ class _NewsPageState extends State<NewsPage> {
               child: Image.asset('assets/arrow_right.png'),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

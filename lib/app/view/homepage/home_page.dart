@@ -100,7 +100,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget _homePageSliderCard(BuildContext context, String image) {
-    return SizedBox(width: MediaQuery.of(context).size.width, height: 199, child: Image.asset(image));
+    return SizedBox(width: MediaQuery.of(context).size.width, child: Image.asset(image));
   }
 
   Widget _buildCarousel(BuildContext context) {
@@ -185,7 +185,8 @@ class _HomepageState extends State<Homepage> {
 
   Widget _returnMenu(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06),
+      height: Platform.isAndroid ? MediaQuery.of(context).size.height / 1.35 : MediaQuery.of(context).size.height / 1.6,
+      margin: EdgeInsets.only(top: Platform.isAndroid ? 55 : 66),
       decoration: BoxDecoration(
         border: Border.all(color: const Color.fromRGBO(0, 0, 0, 0.1)),
         borderRadius: BorderRadius.circular(32),
@@ -198,7 +199,7 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       child: SizedBox(
-        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 1.57 : MediaQuery.of(context).size.height / 1.4,
+        height: Platform.isAndroid ? MediaQuery.of(context).size.height / 1.57 : MediaQuery.of(context).size.height / 1.6,
         child: Column(
           children: <Widget>[
             Container(
@@ -240,14 +241,23 @@ class _HomepageState extends State<Homepage> {
             ),
             child: Center(
                 child: Text(title,
-                    style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.w500, fontSize: 16, color: ColorHelper.lampGray.color))),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(fontWeight: FontWeight.w500, fontSize: 16, color: ColorHelper.lampGray.color))),
           ),
           const SizedBox(height: 5),
           isPoints
-              ? Text(formatter.format(value).replaceAll(',', ' '),
-                  style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color))
-              : Text(value.toString(),
-                  style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color)),
+              ? FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(formatter.format(value).replaceAll(',', ' '),
+                      style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color)),
+                )
+              : FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(value.toStringAsFixed(2).replaceAll('.', ','),
+                      style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w700, color: ColorHelper.lampDarkGray.color)),
+                ),
         ],
       ),
     );
