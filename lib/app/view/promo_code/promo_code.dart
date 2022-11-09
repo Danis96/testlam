@@ -52,8 +52,7 @@ class _PromoCodePageState extends State<PromoCodePage> {
       child: QRView(
           key: qrKey,
           onQRViewCreated: _onQRViewCreated,
-          overlay: QrScannerOverlayShape(
-              borderColor: ColorHelper.lampGreen.color, borderRadius: 10, borderLength: 30, borderWidth: 10, cutOutSize: scanArea)),
+          overlay: QrScannerOverlayShape(borderColor: ColorHelper.lampGreen.color, borderRadius: 10, borderLength: 30, borderWidth: 10, cutOutSize: scanArea)),
     );
   }
 
@@ -158,10 +157,17 @@ class _PromoCodePageState extends State<PromoCodePage> {
 
   Widget _buildAdditionalInfo(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 35),
       decoration: BoxDecoration(
         border: Border.all(color: ColorHelper.lampLightGray.color),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.16),
+            blurRadius: 4,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
       ),
       child: Column(
         children: <Widget>[
@@ -169,12 +175,12 @@ class _PromoCodePageState extends State<PromoCodePage> {
             textAlign: TextAlign.center,
             text: TextSpan(
               children: <TextSpan>[
-                TextSpan(text: 'Aktiviranje promo koda se vrši na sljedeći način: ', style: Theme.of(context).textTheme.headline3),
+                TextSpan(text: 'Aktiviranje promo koda se vrši na sljedeći način: ', style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 15)),
                 TextSpan(
-                    text: '\nUpiše se promo kod u odgovarajuće polje i izvrši se njegovo aktiviranje ili se QR kod skenira i aktivira ',
+                    text: '\n• Upiše se promo kod u odgovarajuće \n polje i izvrši se njegovo aktiviranje ili \nse QR kod skenira i aktivira ',
                     style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w600)),
                 TextSpan(
-                    text: '\nImate ukupno 5 pokušaja za aktiviranje, u suprotnom unos promo koda će biti privremeno blokiran.',
+                    text: '\n\nImate ukupno 5 pokušaja za aktiviranje, u suprotnom unos promo koda će biti privremeno blokiran.',
                     style: Theme.of(context).textTheme.headline3),
               ],
             ),

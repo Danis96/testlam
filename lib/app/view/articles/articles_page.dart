@@ -142,7 +142,17 @@ Widget _buildArticlesGridList(BuildContext context) {
 
 Widget _buildArticlesItem(BuildContext context, {String img = '', String name = '', String bodovi = '', String km = ''}) {
   return Container(
-    decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(11)),
+    decoration: BoxDecoration(
+      border: Border.all(color: ColorHelper.lampLightGray.color),
+      borderRadius: BorderRadius.circular(11),
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.17),
+          blurRadius: 4,
+          blurStyle: BlurStyle.outer,
+        ),
+      ],
+    ),
     child: Stack(
       children: [
         Column(
@@ -186,16 +196,13 @@ Widget _buildArticlesItem(BuildContext context, {String img = '', String name = 
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
-                  color: ColorHelper.lampGreen.color,
-                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
+                  color: ColorHelper.lampGreen.color, borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
               child: Column(
                 children: <Widget>[
                   Text('$bodovi b',
-                      style:
-                          Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
+                      style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
                   Text('$km KM',
-                      style:
-                          Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
+                      style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
                 ],
               ),
             ),

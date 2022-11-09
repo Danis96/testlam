@@ -167,7 +167,7 @@ class _DopunaPageState extends State<DopunaPage> {
         margin: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: ColorHelper.lampGreen.color.withOpacity(0.3)),
+          border: Border.all(color: ColorHelper.lampLightGray.color),
           color: checked ? ColorHelper.lampGreen.color : ColorHelper.white.color,
         ),
         child: Row(
@@ -175,7 +175,12 @@ class _DopunaPageState extends State<DopunaPage> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.only(left: 15),
-              child: image != null ? Image.asset(image) : Text(text),
+              child: image != null
+                  ? Image.asset(image)
+                  : Text(
+                      text,
+                      style: TextStyle(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w500, fontFamily: 'Ubuntu', fontSize: 16),
+                    ),
             ),
             !checked
                 ? Container(
