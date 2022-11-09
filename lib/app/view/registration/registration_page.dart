@@ -94,15 +94,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
           obscureText: !showPass,
         ),
         Positioned(
-            bottom: 36,
-            right: 15,
+            bottom: 34,
+            right: 26,
             child: GestureDetector(
                 onTap: () {
                   setState(() {
                     showPass = !showPass;
                   });
                 },
-                child: Icon(showPass ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: ColorHelper.lampGray.color))),
+                child: Icon(size: 22, showPass ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: ColorHelper.lampGray.color))),
       ],
     );
   }
