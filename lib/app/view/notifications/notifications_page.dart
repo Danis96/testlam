@@ -17,7 +17,6 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -66,7 +65,8 @@ Widget _buildBody(BuildContext context) {
             context.read<AccountProvider>().setNotification(singleNotification);
             Navigator.of(context).pushNamed(notificationDetails, arguments: context.read<AccountProvider>());
           },
-          child: _notificationWidget(context, singleNotification.notificationTitle, singleNotification.description, singleNotification.amount.toString()));
+          child: _notificationWidget(
+              context, singleNotification.notificationTitle, singleNotification.description, singleNotification.amount.toString()));
     },
   );
 }
@@ -87,15 +87,35 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
               children: <Widget>[
                 SizedBox(
                     width: MediaQuery.of(context).size.width / 1.9,
-                    child: Text(title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color))),
-                Container(width: 100,  child: FittedBox(fit: BoxFit.scaleDown, child: Text('$amount ${int.parse(amount).returnPoints()}', textAlign: TextAlign.end, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24)))),
+                    child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2!
+                          .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w700),
+                    )),
+                SizedBox(
+                  width: 100,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '$amount ${int.parse(amount).returnPoints()}',
+                      textAlign: TextAlign.end,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                          color: amount.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
               ],
             ),
             Text(desc,
-                style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
+                style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w400, fontSize: 16)),
           ],
         ),
       ),
