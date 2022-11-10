@@ -56,7 +56,19 @@ Widget _buildBody(BuildContext context) {
     padding: const EdgeInsets.symmetric(horizontal: 34),
     shrinkWrap: true,
     children: <Widget>[
-      SizedBox(
+      SizedBox(height: 5),
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: ColorHelper.lampLightGray.color),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.17),
+              blurRadius: 4,
+              blurStyle: BlurStyle.outer,
+            ),
+          ],
+        ),
         height: 300,
         width: 300,
         child: news.image.isNotEmpty

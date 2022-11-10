@@ -72,7 +72,17 @@ Widget _buildBody(BuildContext context) {
 Widget _buildProdajnaMjestaWidget(BuildContext context, String img, String title, int startPoints, int endPoints, int price) {
   return Container(
     margin: const EdgeInsets.only(top: 25),
-    decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(12)),
+    decoration: BoxDecoration(
+      border: Border.all(color: ColorHelper.lampLightGray.color),
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.17),
+          blurRadius: 4,
+          blurStyle: BlurStyle.outer,
+        ),
+      ],
+    ),
     child: Column(
       children: <Widget>[
         const SizedBox(height: 10),
@@ -151,50 +161,62 @@ Widget _buildFooter(BuildContext context, int start, int end, int price) {
 
 Widget _buildAddressWidget(BuildContext context) {
   return Card(
-    child: Column(
-      children: <Widget>[
-        Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: ColorHelper.lampGreen.color,
-            borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: ColorHelper.lampLightGray.color),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.17),
+            blurRadius: 4,
+            blurStyle: BlurStyle.outer,
           ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    prodajna_mjesta_mjesto,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 19, fontWeight: FontWeight.w700),
+        ],
+      ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: ColorHelper.lampGreen.color,
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+            ),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      prodajna_mjesta_mjesto,
+                      style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 16, fontWeight: FontWeight.w700, fontFamily: 'Ubuntu medium'),
+                    ),
                   ),
                 ),
-              ),
-              const VerticalDivider(),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    prodajna_mjesta_adresa,
-                    style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 19, fontWeight: FontWeight.w700),
+                const VerticalDivider(),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      prodajna_mjesta_adresa,
+                      style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 16, fontWeight: FontWeight.w700, fontFamily: 'Ubuntu medium'),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: context.watch<SalesLocationProvider>().salesMerchantAddressList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final SalesMerchantAddress address = context.watch<SalesLocationProvider>().salesMerchantAddressList[index];
-            return _buildAddressItem(
-                context, address.city, address.address, index, context.watch<SalesLocationProvider>().salesMerchantAddressList.length);
-          },
-        ),
-      ],
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: context.watch<SalesLocationProvider>().salesMerchantAddressList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final SalesMerchantAddress address = context.watch<SalesLocationProvider>().salesMerchantAddressList[index];
+              return _buildAddressItem(context, address.city, address.address, index, context.watch<SalesLocationProvider>().salesMerchantAddressList.length);
+            },
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -216,7 +238,10 @@ Widget _buildAddressItem(BuildContext context, String city, String address, int 
               padding: const EdgeInsets.all(3.5),
               child: Text(
                 city,
-                style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 19, fontWeight: FontWeight.w700),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w700, fontFamily: 'Ubuntu medium', fontStyle: FontStyle.normal),
               ),
             ),
           ),
@@ -228,7 +253,10 @@ Widget _buildAddressItem(BuildContext context, String city, String address, int 
               padding: const EdgeInsets.all(3.5),
               child: Text(
                 address,
-                style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 17, fontWeight: FontWeight.w500),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline3!
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'Ubuntu medium', fontStyle: FontStyle.normal),
               ),
             ),
           ),

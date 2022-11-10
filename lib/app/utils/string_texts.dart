@@ -44,7 +44,8 @@ const String dopuna_success = 'Dopuna je uspješno izvršena!';
 // CHANGE PASSWORD
 const String change_pass_btn = 'Promijeni PIN';
 const String change_success_headline = 'Pin je uspješno promijenjen!';
-const String change_success_subtitle = 'Poruka s novim pinom će doći na broj telefona 063-112-332, a ukoliko navedeni broj nije ispravan, pozovite nas na BESPLATAN info broj 080/030-555!';
+const String change_success_subtitle =
+    'Poruka s novim pinom će doći na broj telefona 063-112-332, a ukoliko navedeni broj nije ispravan, pozovite nas na BESPLATAN info broj 080/030-555!';
 
 // NOVOSTI
 const String novosti_empty = 'Trenutno nemate novosti';
@@ -64,7 +65,7 @@ const String prodajna_mjesta_mjesto = 'Mjesto';
 const String pomozi_app_bar = 'Doniraj bodove';
 const String pomozi_point_number_field = 'Unesi broj bodova';
 const String pomozi_pokloni_bodove_btn = 'Potvrdi';
-const String pomozi_pokloni_headline = 'Budimo humani, jer imamo samo ono što damo.';
+
 const String pomozi_bodovi_uspjesno_title = 'Bodovi su uspješno donirani!';
 const String pomozi_bodovi_uspjesno_subtitle = 'Gdje postoji ljubav i velikodušnost, tu postoji i život!';
 
@@ -76,6 +77,3 @@ const String pokloni_btn = 'Potvrdi';
 
 // KARTICA PAGE
 const String br_kartice = 'Broj kartice: ';
-
-
-

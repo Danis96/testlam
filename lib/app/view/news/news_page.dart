@@ -89,8 +89,7 @@ class _NewsPageState extends State<NewsPage> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {},
-                child: Container(
-                    margin: const EdgeInsets.only(top: 20), child: _newsWidget(context, news.image, news.intro, news.formattedDate, news.id)),
+                child: Container(margin: const EdgeInsets.only(top: 20), child: _newsWidget(context, news.image, news.intro, news.formattedDate, news.id)),
               ),
             ],
           );
@@ -119,7 +118,17 @@ class _NewsPageState extends State<NewsPage> {
           Card(
             elevation: 1,
             child: Container(
-              decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(11)),
+              decoration: BoxDecoration(
+                border: Border.all(color: ColorHelper.lampLightGray.color),
+                borderRadius: BorderRadius.circular(11),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.17),
+                    blurRadius: 4,
+                    blurStyle: BlurStyle.outer,
+                  ),
+                ],
+              ),
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -127,11 +136,11 @@ class _NewsPageState extends State<NewsPage> {
                     width: 300,
                     child: image != ''
                         ? ClipRRect(
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
-                        child: Image.network(
-                          image,
-                          fit: BoxFit.fill,
-                        ))
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+                            child: Image.network(
+                              image,
+                              fit: BoxFit.fill,
+                            ))
                         : const SizedBox(),
                   ),
                   SizedBox(
@@ -162,7 +171,7 @@ class _NewsPageState extends State<NewsPage> {
           ),
           Positioned(
             bottom: Platform.isAndroid ? MediaQuery.of(context).size.height / 17 : MediaQuery.of(context).size.height / 20,
-            right: Platform.isAndroid ? MediaQuery.of(context).size.width / 10 : 9,
+            right: Platform.isAndroid ? MediaQuery.of(context).size.width / 32 : 10,
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

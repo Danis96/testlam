@@ -93,14 +93,13 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
-              _chooseWidget(context, provider.chosenCitiesString.isNotEmpty ? provider.chosenCitiesString.join(', ') : prodajna_mjesta_odaberi_grad,
-                  () {
+              _chooseWidget(context, provider.chosenCitiesString.isNotEmpty ? provider.chosenCitiesString.join(', ') : prodajna_mjesta_odaberi_grad, () {
                 provider.showCityWidget(!provider.showCity);
                 showCityDialog(context);
               }),
               const SizedBox(height: 20),
-              _chooseWidget(context,
-                  provider.chosenCategoriesString.isNotEmpty ? provider.chosenCategoriesString.join(', ') : prodajna_mjesta_odaberi_kategoriju, () {
+              _chooseWidget(
+                  context, provider.chosenCategoriesString.isNotEmpty ? provider.chosenCategoriesString.join(', ') : prodajna_mjesta_odaberi_kategoriju, () {
                 provider.showCategoryWidget(!provider.showCategory);
                 showCategoryDialog(context);
               }),
@@ -136,30 +135,39 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
     );
   }
 
-  Widget _buildProdajnaMjestaWidget(
-      BuildContext context, String img, String title, int startPoints, int endPoints, int price, SalesMerchant salesMerchant) {
+  Widget _buildProdajnaMjestaWidget(BuildContext context, String img, String title, int startPoints, int endPoints, int price, SalesMerchant salesMerchant) {
     return GestureDetector(
       onTap: () {
         context.read<SalesLocationProvider>().setSelectedMerchant(salesMerchant);
         Navigator.of(context).pushNamed(prodajnaMjestaDetalji, arguments: context.read<SalesLocationProvider>());
       },
       child: Container(
-        margin: const EdgeInsets.only(top: 25),
-        decoration: BoxDecoration(border: Border.all(color: ColorHelper.lampLightGray.color), borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.only(top: 23),
+        decoration: BoxDecoration(
+          border: Border.all(color: ColorHelper.lampLightGray.color),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.17),
+              blurRadius: 4,
+              blurStyle: BlurStyle.outer,
+            ),
+          ],
+        ),
         child: Column(
           children: <Widget>[
             const SizedBox(height: 10),
             img.isNotEmpty && img != ''
                 ? Image.network(
                     img,
-                    width: 200,
+                    width: 120,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.transparent),
                           borderRadius: const BorderRadius.only(topRight: Radius.circular(11), topLeft: Radius.circular(11)),
                         ),
-                        child: Image.asset('assets/lampica_logo.png', height: 80),
+                        child: Image.asset('assets/lampica_logo.png', height: 50),
                       );
                     },
                   )
@@ -168,16 +176,16 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
                       border: Border.all(color: Colors.transparent),
                       borderRadius: const BorderRadius.only(topRight: Radius.circular(11), topLeft: Radius.circular(11)),
                     ),
-                    child: Image.asset('assets/lampica_logo.png', height: 80),
+                    child: Image.asset('assets/lampica_logo.png', height: 50),
                   ),
-            Text(title, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500)),
+            Text(title, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontFamily: 'Ubuntu medium 16')),
             const SizedBox(height: 10),
             _buildFooter(context, startPoints, endPoints, price, salesMerchant),
             salesMerchant.additionalInfo.isNotEmpty
                 ? Container(
                     padding: const EdgeInsets.only(top: 5),
-                    child: Text(salesMerchant.additionalInfo,
-                        style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 15)),
+                    child:
+                        Text(salesMerchant.additionalInfo, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 15)),
                   )
                 : const SizedBox(),
           ],
@@ -267,9 +275,7 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            isCity
-                ? context.read<SalesLocationProvider>().setChooseBoolValueCity(id)
-                : context.read<SalesLocationProvider>().setChooseBoolValueCategory(id);
+            isCity ? context.read<SalesLocationProvider>().setChooseBoolValueCity(id) : context.read<SalesLocationProvider>().setChooseBoolValueCategory(id);
           });
         },
         child: Row(

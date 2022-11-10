@@ -43,7 +43,19 @@ class PomoziBa extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        Image.asset('assets/pomoziba.png'),
+        Container(
+            // decoration: BoxDecoration(
+            //   border: Border.all(color: const Color.fromRGBO(0, 0, 0, 0.1)),
+            //   borderRadius: BorderRadius.circular(32),
+            //   boxShadow: const [
+            //     BoxShadow(
+            //       color: Color.fromRGBO(0, 0, 0, 0.16),
+            //       blurRadius: 4,
+            //       blurStyle: BlurStyle.outer,
+            //     ),
+            //   ],
+            // ),
+            child: Image.asset('assets/pomoziba.png')),
         const SizedBox(
           height: 40,
         ),
@@ -101,19 +113,28 @@ class PomoziBa extends StatelessWidget {
   Widget _msg() {
     return Container(
       height: 117,
-      padding: EdgeInsets.symmetric(horizontal: 45),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          border: Border.all(color: ColorHelper.lampGray.color),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15.0),
-          )),
+        border: Border.all(color: ColorHelper.lampLightGray.color),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.16),
+            blurRadius: 4,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
       child: Text(
-        pomozi_pokloni_headline,
+        '''Budimo humani,
+        jer imamo samo ono što damo.''',
         textAlign: TextAlign.center,
         style: TextStyle(
           color: ColorHelper.lampGray.color,
-          fontSize: 20,
+          fontSize: 19,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -127,6 +148,13 @@ Widget _successWidget(BuildContext context) {
     decoration: BoxDecoration(
       border: Border.all(color: ColorHelper.lampLightGray.color),
       borderRadius: BorderRadius.circular(11),
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.16),
+          blurRadius: 4,
+          blurStyle: BlurStyle.outer,
+        ),
+      ],
     ),
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
     child: Column(
