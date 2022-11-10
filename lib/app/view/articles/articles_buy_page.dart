@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:lamp/app/utils/string_texts.dart';
 import 'package:lamp/common_widgets/buttons/button.dart';
 import 'package:lamp/common_widgets/dialog/lamp_dialog.dart';
@@ -187,8 +188,8 @@ Widget _returnArticleCard(BuildContext context, ArticleModel a) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('${a.creditAmount} b', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w400, fontSize: 16)),
-                    Text('${a.priceAmount} km', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w400, fontSize: 16)),
+                    Text('${a.creditAmount} ${a.creditAmount.returnPoints()}', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w400, fontSize: 16)),
+                    Text('${a.priceAmount} KM', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w400, fontSize: 16)),
                   ],
                 ),
               ],

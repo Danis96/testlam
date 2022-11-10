@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lamp/app/models/report_model.dart';
 import 'package:lamp/app/providers/provider_helper.dart';
 import 'package:lamp/app/providers/report_provider/report_provider.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:lamp/common_widgets/buttons/button.dart';
 import 'package:lamp/common_widgets/text_field/TextFieldType.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +93,7 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
             report.merchantName,
             report.salesAmount.toStringAsFixed(2),
             DateFormat("dd.MM.yyyy").format(DateTime.parse(report.purchaseDate)),
-            report.transactionPointsAmount.toStringAsFixed(0));
+            report.transactionPointsAmount);
       },
     );
   }
@@ -196,7 +197,7 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
             buttonTitle: 'Potvrdi'));
   }
 
-  Widget _reportWidget(BuildContext context, String title, String merchantName, String desc, String date, String transactionPoint) {
+  Widget _reportWidget(BuildContext context, String title, String merchantName, String desc, String date, int transactionPoint) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Card(
@@ -221,15 +222,16 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
                               .textTheme
                               .headline2!
                               .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w400))),
+
                   Expanded(
                     child: Container(
                       width: 100,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          transactionPoint.contains('-') ? '$transactionPoint b' : '${transactionPoint.replaceAll('-', '+')} b',
+                          transactionPoint.toStringAsFixed(0).contains('-') ? '$transactionPoint ${transactionPoint.returnPoints()}' : '${transactionPoint.toStringAsFixed(0).replaceAll('-', '+')} b',
                           style: Theme.of(context).textTheme.headline2!.copyWith(
-                                color: transactionPoint.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
+                                color: transactionPoint.toStringAsFixed(0).contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
                                 fontSize: 24,
                                 fontWeight: FontWeight.w400,
                               ),

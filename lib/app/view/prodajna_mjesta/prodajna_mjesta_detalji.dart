@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/app/models/sales_merchant_model.dart';
 import 'package:lamp/app/providers/sales_location_provider/sales_location_provider.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common_widgets/app_bar/app_bar.dart';
@@ -129,17 +130,17 @@ Widget _buildFooter(BuildContext context, int start, int end, int price) {
           child: Row(
             children: <Widget>[
               Image.asset('assets/lamp_small_logo.png', width: 20),
-              Text('$start$prodajna_mjesta_bod', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
+              Text('$start ${start.returnPoints()}', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
             ],
           ),
         ),
-        Text('$price $prodajna_mjesta_KM', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
+        Text('$price${'KM'}', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: <Widget>[
               Image.asset('assets/lamp_small_logo.png', width: 20),
-              Text('$end$prodajna_mjesta_bod', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
+              Text('$end ${end.returnPoints()}', style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w700, fontSize: 17)),
             ],
           ),
         ),

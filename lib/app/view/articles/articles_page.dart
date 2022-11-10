@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lamp/app/models/articles_model.dart';
 import 'package:lamp/app/providers/articles_provider/articles_provider.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:lamp/routing/routes.dart';
 import 'package:lamp/theme/color_helper.dart';
 import 'package:provider/provider.dart';
@@ -199,7 +200,7 @@ Widget _buildArticlesItem(BuildContext context, {String img = '', String name = 
                   color: ColorHelper.lampGreen.color, borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10))),
               child: Column(
                 children: <Widget>[
-                  Text('$bodovi b',
+                  Text('$bodovi ${int.parse(bodovi).returnPoints()}',
                       style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),
                   Text('$km KM',
                       style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, color: ColorHelper.lampGray.color, fontSize: 16)),

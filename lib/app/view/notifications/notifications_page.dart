@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/app/models/user_notification_model.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:lamp/routing/routes.dart';
 import 'package:lamp/theme/color_helper.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +91,7 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color))),
-                Container(width: 90,  child: Text('$amount b', textAlign: TextAlign.end, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24))),
+                Container(width: 100,  child: FittedBox(fit: BoxFit.scaleDown, child: Text('$amount ${int.parse(amount).returnPoints()}', textAlign: TextAlign.end, maxLines: 1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24)))),
               ],
             ),
             Text(desc,

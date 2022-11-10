@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/app/providers/account_provider/account_provider.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common_widgets/app_bar/app_bar.dart';
@@ -86,7 +87,7 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
             Text(desc,
                 style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
             const SizedBox(height: 5),
-            Text('$amount b', style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24)),
+            Text('$amount ${int.parse(amount).returnPoints()}', style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24)),
           ],
         ),
       ),

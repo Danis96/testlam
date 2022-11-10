@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lamp/app/models/articles_model.dart';
 import 'package:lamp/app/providers/articles_provider/articles_provider.dart';
+import 'package:lamp/app/utils/int_extension.dart';
 import 'package:lamp/common_widgets/buttons/button.dart';
 import 'package:lamp/routing/routes.dart';
 import 'package:provider/provider.dart';
@@ -74,15 +75,10 @@ Widget _button(BuildContext context) {
 Widget _returnArticleCard(BuildContext context) {
   final ArticleModel a = context.read<ArticlesProvider>().articleDetail;
   return Container(
-
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
       boxShadow: [
-        BoxShadow(
-          color: ColorHelper.black.color.withOpacity(0.17),
-          blurRadius: 10,
-          blurStyle: BlurStyle.normal,
-        ),
+        BoxShadow(color: ColorHelper.black.color.withOpacity(0.17), blurRadius: 10, blurStyle: BlurStyle.normal),
       ],
     ),
     child: Card(
@@ -121,7 +117,11 @@ Widget _returnArticleCard(BuildContext context) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(a.name, style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 20, color: ColorHelper.lampGray.color)),
+                  Text(a.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2!
+                          .copyWith(fontWeight: FontWeight.w500, fontSize: 20, color: ColorHelper.lampGray.color)),
                   const SizedBox(height: 4),
                   Text('Dostupno komada: ${a.quantity}',
                       style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 14, fontWeight: FontWeight.w300)),
@@ -137,8 +137,8 @@ Widget _returnArticleCard(BuildContext context) {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('${a.creditAmount} b', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16)),
-                      Text('${a.priceAmount} km', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16)),
+                      Text('${a.creditAmount} ${a.creditAmount.returnPoints()}', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16)),
+                      Text('${a.priceAmount} KM', style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 16)),
                     ],
                   ),
                 ],
