@@ -24,13 +24,15 @@ class AuthProvider extends ChangeNotifier {
   TokenModel get tokenModel => _tokenModel;
 
   Future<String?> getToken() async {
-    if (usernameController.text.isNotEmpty && codeController.text.isNotEmpty) {
+    if (usernameController.text.isNotEmpty  && codeController.text.isNotEmpty) {
       try {
-        final List<String> _c = usernameController.text.split(' ');
         String _combined = '';
-        if(_c.isNotEmpty && _c.length >= 2) {
-          _combined = _c[0] + _c[1] + _c[2];
-        }
+        // if(usernameController.text.length == 9) {
+          final List<String> _c = usernameController.text.split(' ');
+          if(_c.isNotEmpty && _c.length >= 2) {
+            _combined = _c[0] + _c[1] + _c[2];
+          }
+        // }
         _tokenModel = await _authRepository!.getToken(_combined, codeController.text);
         await storagePrefs.setValue(StoragePrefsManager.ACCESS_TOKEN, _tokenModel.accessToken);
         storagePrefs.setEmailInShared(usernameController.text);
@@ -41,7 +43,7 @@ class AuthProvider extends ChangeNotifier {
         if (isNumeric(e.toString())) {
           numberOfAttempts = e.toString();
         } else {
-          numberOfAttempts = '0';
+          numberOfAttempts = '4';
         }
         notifyListeners();
         return e.toString();

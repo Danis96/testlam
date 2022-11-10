@@ -161,7 +161,7 @@ Widget _buildTextFormField({
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         prefixIconColor: ColorHelper.lampGray.color,
-        helperText: '',
+        // helperText: '',
         suffixIcon: icon,
         hintText: hintText,
         focusColor: ColorHelper.lampLightGray.color,

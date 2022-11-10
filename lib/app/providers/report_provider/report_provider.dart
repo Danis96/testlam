@@ -19,11 +19,21 @@ class ReportProvider extends ChangeNotifier {
 
   List<ReportModel> get reports => _reports;
 
-  Future<String?> getUserPurchaseReports() async {
-    final String monthNumber = DateTime.now().month.toString();
-    final String yearNumber = DateTime.now().year.toString();
+  Future<String?> getUserPurchaseReports({bool isSelected = false}) async {
     try {
-      _reports = await _reportRepository!.getUserPurchaseReports(monthNumber, yearNumber);
+      if(isSelected) {
+        final List<String> splitted = toController.text.split('.');
+        final String monthNumber = splitted[1];
+        final String yearNumber = splitted[2];
+        searchList.clear();
+        _reports = await _reportRepository!.getUserPurchaseReports(monthNumber, yearNumber);
+      } else {
+        final String monthNumber = DateTime.now().month.toString();
+        final String yearNumber = DateTime.now().year.toString();
+        searchList.clear();
+        showEmpty = false;
+        _reports = await _reportRepository!.getUserPurchaseReports(monthNumber, yearNumber);
+      }
       notifyListeners();
       return null;
     } catch (e) {
@@ -39,7 +49,14 @@ class ReportProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetFilter() {
+     fromController.text = '';
+     notifyListeners();
+  }
+
   List<ReportModel> searchList = <ReportModel>[];
+
+  bool showEmpty = false;
 
   void searchByName() {
     if (searchController.text.isNotEmpty) {
@@ -48,6 +65,11 @@ class ReportProvider extends ChangeNotifier {
         if (element.merchantName.toLowerCase().contains(searchController.text)) {
           searchedItems.add(element);
         }
+      }
+      if(searchedItems.isEmpty) {
+        showEmpty = true;
+      } else {
+        showEmpty = false;
       }
       searchList.clear();
       searchList.addAll(searchedItems);

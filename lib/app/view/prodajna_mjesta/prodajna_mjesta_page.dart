@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lamp/app/providers/sales_location_provider/sales_location_provider.dart';
@@ -141,55 +143,74 @@ class _ProdajnaMjestapageState extends State<ProdajnaMjestapage> {
         context.read<SalesLocationProvider>().setSelectedMerchant(salesMerchant);
         Navigator.of(context).pushNamed(prodajnaMjestaDetalji, arguments: context.read<SalesLocationProvider>());
       },
-      child: Container(
-        margin: const EdgeInsets.only(top: 23),
-        decoration: BoxDecoration(
-          border: Border.all(color: ColorHelper.lampLightGray.color),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.17),
-              blurRadius: 4,
-              blurStyle: BlurStyle.outer,
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 23),
+            decoration: BoxDecoration(
+              border: Border.all(color: ColorHelper.lampLightGray.color),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.17),
+                  blurRadius: 4,
+                  blurStyle: BlurStyle.outer,
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 10),
-            img.isNotEmpty && img != ''
-                ? Image.network(
-                    img,
-                    width: 120,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return Container(
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 10),
+                img.isNotEmpty && img != ''
+                    ? Image.network(
+                        img,
+                        width: 120,
+                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.transparent),
+                              borderRadius: const BorderRadius.only(topRight: Radius.circular(11), topLeft: Radius.circular(11)),
+                            ),
+                            child: Image.asset('assets/lampica_logo.png', height: 50),
+                          );
+                        },
+                      )
+                    : Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.transparent),
                           borderRadius: const BorderRadius.only(topRight: Radius.circular(11), topLeft: Radius.circular(11)),
                         ),
                         child: Image.asset('assets/lampica_logo.png', height: 50),
-                      );
-                    },
-                  )
-                : Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.transparent),
-                      borderRadius: const BorderRadius.only(topRight: Radius.circular(11), topLeft: Radius.circular(11)),
-                    ),
-                    child: Image.asset('assets/lampica_logo.png', height: 50),
-                  ),
-            Text(title, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontFamily: 'Ubuntu medium 16')),
-            const SizedBox(height: 10),
-            _buildFooter(context, startPoints, endPoints, price, salesMerchant),
-            salesMerchant.additionalInfo.isNotEmpty
-                ? Container(
-                    padding: const EdgeInsets.only(top: 5),
-                    child:
-                        Text(salesMerchant.additionalInfo, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 15)),
-                  )
-                : const SizedBox(),
-          ],
-        ),
+                      ),
+                Text(title, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w500, fontFamily: 'Ubuntu medium 16')),
+                const SizedBox(height: 10),
+                _buildFooter(context, startPoints, endPoints, price, salesMerchant),
+                salesMerchant.additionalInfo.isNotEmpty
+                    ? Container(
+                        padding: const EdgeInsets.only(top: 5),
+                        child:
+                            Text(salesMerchant.additionalInfo, style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w400, fontSize: 15)),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: Platform.isAndroid ? MediaQuery.of(context).size.height / 20 : MediaQuery.of(context).size.height / 22,
+            right: Platform.isAndroid ? MediaQuery.of(context).size.width / 46 : 4,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorHelper.white.color,
+                boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0, blurRadius: 10)],
+              ),
+              height: 23,
+              width: 23,
+              padding: const EdgeInsets.all(7),
+              child: Image.asset('assets/arrow_right.png'),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -97,6 +97,7 @@ Widget _buildBody(BuildContext context) {
     shrinkWrap: true,
     children: <Widget>[
       _buildSearchWidget(context),
+      const SizedBox(height: 30),
       _buildArticlesGridList(context),
     ],
   );
@@ -164,7 +165,7 @@ Widget _buildArticlesItem(BuildContext context, {String img = '', String name = 
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
               child: Image.network(
                 img,
-                height: Platform.isIOS ? 120 : 140,
+                height: Platform.isIOS ? 120 : MediaQuery.of(context).size.width < 400 ? 120 :  140,
                 width: MediaQuery.of(context).size.width / 2,
                 fit: BoxFit.fill,
                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -210,7 +211,7 @@ Widget _buildArticlesItem(BuildContext context, {String img = '', String name = 
           ],
         ),
         Positioned(
-          bottom: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.085 : MediaQuery.of(context).size.height * 0.065,
+          bottom: Platform.isAndroid ? MediaQuery.of(context).size.width < 400 ? MediaQuery.of(context).size.height * 0.091 : MediaQuery.of(context).size.height * 0.085 : MediaQuery.of(context).size.height * 0.065,
           right: Platform.isAndroid ? MediaQuery.of(context).size.width * 0.02 : MediaQuery.of(context).size.width * 0.01,
           child: Container(
             decoration: BoxDecoration(

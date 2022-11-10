@@ -43,34 +43,31 @@ class PomoziBa extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        Container(
-            // decoration: BoxDecoration(
-            //   border: Border.all(color: const Color.fromRGBO(0, 0, 0, 0.1)),
-            //   borderRadius: BorderRadius.circular(32),
-            //   boxShadow: const [
-            //     BoxShadow(
-            //       color: Color.fromRGBO(0, 0, 0, 0.16),
-            //       blurRadius: 4,
-            //       blurStyle: BlurStyle.outer,
-            //     ),
-            //   ],
-            // ),
-            child: Image.asset('assets/pomoziba.png')),
+        Container(child: Image.asset('assets/pomoziba.png')),
         const SizedBox(
           height: 40,
         ),
         context.watch<DonationProvider>().isPomoziBaSuccess
             ? _successWidget(context)
             : Column(
-                children: [
-                  pointNumberField(context),
-                  pokloniBodoveButton(context),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  _msg(),
-                ],
-              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                      children: [
+                        pointNumberField(context),
+                        const SizedBox(height: 33),
+                        pokloniBodoveButton(context),
+                        const SizedBox(
+                          height: 80,
+                        ),
+                      ],
+                    ),
+                ),
+                _msg(),
+              ],
+            ),
+
         const SizedBox(
           height: 40,
         ),
@@ -129,8 +126,7 @@ class PomoziBa extends StatelessWidget {
         ],
       ),
       child: Text(
-        '''Budimo humani,
-        jer imamo samo ono što damo.''',
+        'Budimo humani,\njer imamo samo ono što damo.',
         textAlign: TextAlign.center,
         style: TextStyle(
           color: ColorHelper.lampGray.color,
@@ -156,13 +152,16 @@ Widget _successWidget(BuildContext context) {
         ),
       ],
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+    padding: const EdgeInsets.only(top: 48, bottom: 29, left: 10, right: 10),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Image.asset('assets/ic_success.png', width: 50),
-        Text(pomozi_bodovi_uspjesno_title, style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500)),
-        Text(pomozi_bodovi_uspjesno_subtitle, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline4),
+        Image.asset('assets/ic_success.png', width: 48),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Text(pomozi_bodovi_uspjesno_title, style: Theme.of(context).textTheme.headline2!.copyWith(fontWeight: FontWeight.w500, fontSize: 20)),
+        ),
+        Text(pomozi_bodovi_uspjesno_subtitle, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 20)),
       ],
     ),
   );

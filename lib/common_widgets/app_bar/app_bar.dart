@@ -71,6 +71,7 @@ Widget returnLeading(
           icon: Icon(
             leadingIcon,
             color: leadingIconColor,
+            size: 18,
           ),
         ),
       );

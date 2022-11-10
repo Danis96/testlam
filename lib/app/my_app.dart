@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lamp/app/repositories/navigation_repo.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../routing/route_generator.dart';
@@ -36,6 +38,14 @@ Widget buildApp(BuildContext ctx) {
       final MediaQueryData data = MediaQuery.of(context);
       return MediaQuery(data: data.copyWith(textScaleFactor: 1.0), child: child!);
     },
+    localizationsDelegates: const [
+      GlobalWidgetsLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      MonthYearPickerLocalizations.delegate,
+    ],
+    supportedLocales: [
+      Locale('hr', 'HR'),
+    ],
     initialRoute: splash,
     onGenerateRoute: RouteGenerator.generateRoute,
     debugShowCheckedModeBanner: false,

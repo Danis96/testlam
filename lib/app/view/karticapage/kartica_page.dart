@@ -63,6 +63,7 @@ class _KarticaPageState extends State<KarticaPage> with WidgetsBindingObserver {
       shrinkWrap: true,
       children: <Widget>[
         _buildIcon(context),
+        const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: _buildCard(context),
@@ -73,7 +74,7 @@ class _KarticaPageState extends State<KarticaPage> with WidgetsBindingObserver {
 
   Widget _buildIcon(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.5,
+      height: MediaQuery.of(context).size.height / 3.7,
       alignment: Alignment.center,
       child: Image.asset('assets/logo_with_text.png'),
     );
@@ -105,6 +106,7 @@ class _KarticaPageState extends State<KarticaPage> with WidgetsBindingObserver {
             },
             child: Container(
               height: 174,
+              width: 350,
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: context.watch<AccountProvider>().barcodeSVGPath != null || context.watch<AccountProvider>().barcodeSVGPath!.isNotEmpty
                   ? SvgPicture.file(File(context.watch<AccountProvider>().barcodeSVGPath!))

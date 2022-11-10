@@ -54,6 +54,9 @@ dependencies:
   qr_code_scanner: ^1.0.1
   flutter_multi_formatter: ^2.9.3
   sprintf: ^7.0.0
+  month_year_picker: ^0.2.0+3
+  flutter_localizations:
+    sdk: flutter
 
 
 

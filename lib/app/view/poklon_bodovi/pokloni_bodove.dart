@@ -39,7 +39,7 @@ class PokloniBodove extends StatelessWidget {
     return ListView(
       children: [
         const SizedBox(height: 40),
-        Padding(padding: const EdgeInsets.symmetric(horizontal: 25), child: Image.asset('assets/pokloni_bodove.png')),
+        Padding(padding: const EdgeInsets.symmetric(horizontal: 24), child: Image.asset('assets/pokloni_bodove.png')),
         const SizedBox(height: 40),
         context.watch<SendPointsProvider>().pointsSendSuccess
             ? Padding(
@@ -49,7 +49,7 @@ class PokloniBodove extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 57),
                 child: Column(
-                  children: <Widget>[cardNumberField(context), pointNumberField(context), const SizedBox(height: 10), pokloniBodoveButton(context)],
+                  children: <Widget>[cardNumberField(context), const SizedBox(height: 15), pointNumberField(context),  const SizedBox(height: 33), pokloniBodoveButton(context)],
                 ),
               ),
       ],
@@ -110,17 +110,27 @@ class PokloniBodove extends StatelessWidget {
   }
 
   Widget _buildSuccessWidget(BuildContext context) {
-    return Card(
-      child: Container(
-        height: 203,
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Image.asset('assets/ic_success.png', width: 48),
-            Text('Bodovi su uspješno poklonjeni!', style: Theme.of(context).textTheme.headline4!.copyWith(fontStyle: FontStyle.normal)),
-          ],
-        ),
+    return Container(
+      height: 203,
+      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: ColorHelper.lampLightGray.color),
+        borderRadius: BorderRadius.circular(11),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.17),
+            blurRadius: 4,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Image.asset('assets/ic_success.png', width: 48),
+          Text('Bodovi su uspješno poklonjeni!', style: Theme.of(context).textTheme.headline4!.copyWith(fontStyle: FontStyle.normal, fontSize: 20, fontWeight: FontWeight.w500)),
+        ],
       ),
     );
   }

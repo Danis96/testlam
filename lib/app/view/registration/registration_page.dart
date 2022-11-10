@@ -63,12 +63,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Column(
       children: <Widget>[
         _buildCardNumberField(context),
+        const SizedBox(height: 24),
         _buildPINField(context),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        const SizedBox(height: 42),
         _buildButton(context),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-        context.watch<AuthProvider>().showError ? _wrongData(context) : const SizedBox(),
-        context.watch<AuthProvider>().showErrorFromAPI ? _wrongData(context, error: context.read<AuthProvider>().error) : const SizedBox(),
+
+        context.watch<AuthProvider>().showErrorFromAPI ? _wrongData(context, error: context.read<AuthProvider>().error) :  context.watch<AuthProvider>().showError ? _wrongData(context) : const SizedBox(),
       ],
     );
   }
@@ -94,7 +95,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           obscureText: !showPass,
         ),
         Positioned(
-            bottom: 34,
+            bottom: 14,
             right: 26,
             child: GestureDetector(
                 onTap: () {
@@ -117,34 +118,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
             Navigator.of(context).pushNamed(bottomNavigation);
           } else {
             if (error == common_sva_polja_error) {
+              context.read<AuthProvider>().setShowError(false);
               context.read<AuthProvider>().setShowErrorFromApi(true, error);
-              // Lamp_SimpleDialog(
-              //   context,
-              //   title: common_greska_error,
-              //   content: error,
-              //   onButtonPressed: () => Navigator.of(context).pop(),
-              //   buttonText: common_btn_ok,
-              // );
             } else if (error == 'Korisnički podaci nisu ispravni.') {
+              context.read<AuthProvider>().setShowError(false);
               context.read<AuthProvider>().setShowErrorFromApi(true, error);
-              // Lamp_SimpleDialog(
-              //   context,
-              //   title: common_greska_error,
-              //   content: error,
-              //   onButtonPressed: () => Navigator.of(context).pop(),
-              //   buttonText: common_btn_ok,
-              // );
             } else {
+              context.read<AuthProvider>().setShowErrorFromApi(false, error);
               context.read<AuthProvider>().setShowError(true);
-              if (!context.read<AuthProvider>().isNumeric(error)) {
-                Lamp_SimpleDialog(
-                  context,
-                  title: common_greska_error,
-                  content: error,
-                  onButtonPressed: () => Navigator.of(context).pop(),
-                  buttonText: common_btn_ok,
-                );
-              }
             }
           }
         });
