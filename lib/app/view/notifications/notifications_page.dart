@@ -91,7 +91,10 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
                       title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline2!
+                          .copyWith(color: ColorHelper.lampGray.color, fontSize: 16, fontWeight: FontWeight.w700),
                     )),
                 SizedBox(
                   width: 100,
@@ -102,17 +105,17 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
                       textAlign: TextAlign.end,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline2!
-                          .copyWith(color: amount.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color, fontSize: 24),
+                      style: Theme.of(context).textTheme.headline2!.copyWith(
+                          color: amount.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
               ],
             ),
             Text(desc,
-                style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
+                style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w400, fontSize: 16)),
           ],
         ),
       ),

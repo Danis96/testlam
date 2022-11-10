@@ -139,6 +139,8 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
+        initialDatePickerMode: DatePickerMode.year,
+        // locale: Locale('hr'), // add in my app
         builder: (BuildContext context, Widget? child) {
           return Theme(
             data: ThemeData.light().copyWith(
@@ -229,7 +231,7 @@ class _IzvjestajiPageState extends State<IzvjestajiPage> {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(
-                          transactionPoint.toStringAsFixed(0).contains('-') ? '$transactionPoint ${transactionPoint.returnPoints()}' : '${transactionPoint.toStringAsFixed(0).replaceAll('-', '+')} b',
+                          transactionPoint.toStringAsFixed(0).contains('-') ? '${40000} ${transactionPoint.returnPoints()}' : '${transactionPoint.toStringAsFixed(0).replaceAll('-', '+')} b',
                           style: Theme.of(context).textTheme.headline2!.copyWith(
                                 color: transactionPoint.toStringAsFixed(0).contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color,
                                 fontSize: 24,

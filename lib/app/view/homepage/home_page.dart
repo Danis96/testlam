@@ -100,7 +100,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget _homePageSliderCard(BuildContext context, String image) {
-    return SizedBox(width: MediaQuery.of(context).size.width, child: Image.asset(image));
+    return Container( width: MediaQuery.of(context).size.width, child: Image.asset(image));
   }
 
   Widget _buildCarousel(BuildContext context) {

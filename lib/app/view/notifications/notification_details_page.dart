@@ -81,7 +81,7 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
                 child: Text(title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color))),
+                    style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontSize: 20, fontWeight: FontWeight.w400))),
             const SizedBox(height: 5),
             Text(desc,
                 style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
