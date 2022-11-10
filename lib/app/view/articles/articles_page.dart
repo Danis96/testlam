@@ -164,7 +164,7 @@ Widget _buildArticlesItem(BuildContext context, {String img = '', String name = 
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(11), topRight: Radius.circular(11)),
               child: Image.network(
                 img,
-                height: 120,
+                height: Platform.isIOS ? 120 : 140,
                 width: MediaQuery.of(context).size.width / 2,
                 fit: BoxFit.fill,
                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

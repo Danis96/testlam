@@ -15,7 +15,6 @@ class NotificationDetailsPage extends StatefulWidget {
 }
 
 class _NotificationDetailsPageState extends State<NotificationDetailsPage> {
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -87,7 +86,13 @@ Widget _notificationWidget(BuildContext context, String title, String desc, Stri
             Text(desc,
                 style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGray.color, fontWeight: FontWeight.w300, fontSize: 17)),
             const SizedBox(height: 5),
-            Text('$amount ${int.parse(amount).returnPoints()}', style: Theme.of(context).textTheme.headline2!.copyWith(color: ColorHelper.lampGreen.color, fontSize: 24)),
+            Text(
+              '$amount ${int.parse(amount).returnPoints()}',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline2!
+                  .copyWith(color: amount.contains('-') ? ColorHelper.lampRed.color : ColorHelper.lampGreen.color, fontSize: 24),
+            ),
           ],
         ),
       ),
