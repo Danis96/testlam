@@ -1,4 +1,4 @@
-# Lampica Flutter
+# Flutter
 
 A new Flutter project.
 
